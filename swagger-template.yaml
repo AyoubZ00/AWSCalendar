@@ -1,0 +1,10 @@
+swagger: "2.0"
+info:
+  version: "V0.1"
+  title: "MSB UTIL API"
+paths:
+  # V0
+  $ref#globalV0: "v0/swagger/paths.yaml"
+definitions:
+  $ref#global: "swagger-definitions.yaml"
+ 

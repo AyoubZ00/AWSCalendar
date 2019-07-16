@@ -1,0 +1,26 @@
+/:
+  get:
+    produces:
+    - "application/json"
+    responses:
+      200:
+        description: "200 response"
+        schema:
+          $ref: "#/definitions/Version"
+    x-amazon-apigateway-integration:
+      responses:
+        default:
+          statusCode: "200"
+          responseTemplates:
+            application/json: "#set($inputRoot = $input.path('$'))
+{
+  \"version\"\
+              \ : \"${ApiVersion}\",
+  \"stack\" : \"${StackName}\",
+  \"description\" : \"\
+              Version ${ApiVersion} of ${StackName}\"
+}"
+      passthroughBehavior: "never"
+      requestTemplates:
+        application/json: "{\"statusCode\": 200}"
+      type: "mock"

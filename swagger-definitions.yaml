@@ -1,0 +1,14 @@
+Empty:
+  type: object
+  title: Empty Schema
+
+Version:
+  type: "object"
+  properties:
+    version:
+      type: "string"
+    stack:
+      type: "string"
+    description:
+      type: "string"
+  title: "API Version Schema"

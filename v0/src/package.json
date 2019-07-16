@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "pg": "^7.4.3",
+    "sequelize": "^5.8.12"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^5.5.0"
+  }
+}

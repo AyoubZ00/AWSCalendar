@@ -1,0 +1,58 @@
+version: 0.2
+
+env:
+  variables:
+    BUCKET_NAME: "msb-functions"
+
+phases:
+  install:
+    commands:
+      - npm install -g swagger-merger
+      - apt update
+      - apt install jq
+
+  pre_build:
+    commands: |
+        STACK=`echo ${CODEBUILD_INITIATOR} | cut -d'/' -f2`
+        DB_URL=`aws ssm get-parameter --name $STACK-db-url | jq -r '.Parameter.Value' | cut -d':' -f1`
+        DB_USERNAME=`aws ssm get-parameter --name $STACK-db-username | jq -r '.Parameter.Value'`
+        DB_PASSWORD=`aws ssm get-parameter --name $STACK-db-password | jq -r '.Parameter.Value'`
+        NODE_ENV=`echo $STACK | cut -d'-' -f1`
+
+        sed -i.bak -e "s/\${StackName}/${STACK}/g" *.yaml
+        for VERSION in ./*/
+        do
+          VERSION=${VERSION%*/}
+          find ./${VERSION##*/} -name "*.yaml" -print0 | xargs -0 sed -i.bak \
+              -e "s/\${ApiVersion}/${VERSION##*/}/" \
+              -e "s/\${StackName}/${STACK}/" \
+              -e "s/\${NodeEnv}/${NODE_ENV}/"
+
+          sed -i.bak \
+              -e "s/^\//\/${VERSION##*/}\//" \
+              ./${VERSION##*/}/swagger/*.yaml
+
+          cd ${VERSION}/src
+          npm install
+          npx sequelize-cli db:migrate
+          npx sequelize-cli db:seed:all
+          cd ../..
+        done
+        swagger-merger -i ./swagger-template.yaml -o ./swagger.yaml
+
+  build:
+    commands: |
+        aws cloudformation package --template-file ./util-api.yaml --s3-bucket $BUCKET_NAME --output-template-file util-api.yaml
+        for VERSION in ./*/
+        do
+          VERSION=${VERSION%*/}
+          cat ./${VERSION##*/}/templates/*.yaml >> ./${VERSION##*/}/template.yaml
+          aws cloudformation package --template-file ./${VERSION##*/}/template.yaml --s3-bucket $BUCKET_NAME --output-template-file util-${VERSION##*/}.yaml
+        done
+
+artifacts:
+  files:
+    - ./swagger.yaml
+    #- ./util-db.yaml
+    - ./util-api.yaml
+    - ./util-v0.yaml
