@@ -1,0 +1,9 @@
+
+  ###Permission:
+    Type: AWS::Lambda::Permission
+    DependsOn:
+    - ###
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Sub '${StackName}-###-${ApiVersion}'
+      Principal: apigateway.amazonaws.com

@@ -26,7 +26,7 @@ databases.DEV = Object.assign({}, DBConfig);
 databases.PROD = Object.assign({}, DBConfig);
 databases.local = Object.assign({}, DBConfig);
 
-databases.local.username = 'root';
+databases.local.username = 'postgres';
 databases.local.password = null;
 databases.local.host = 'localhost';
 

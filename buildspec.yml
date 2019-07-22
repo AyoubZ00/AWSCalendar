@@ -23,6 +23,12 @@ phases:
         for VERSION in ./*/
         do
           VERSION=${VERSION%*/}
+
+          for TMPL in ./${VERSION##*/}/templates/*.yaml
+          do
+            cat $TMPL | grep -E "^  [^ #]" | grep -oE "[^:]*" | xargs -I {} sed -e "s/###/{}/g" .apigateway-permission >> $TMPL
+          done
+
           find ./${VERSION##*/} -name "*.yaml" -print0 | xargs -0 sed -i.bak \
               -e "s/\${ApiVersion}/${VERSION##*/}/" \
               -e "s/\${StackName}/${STACK}/" \
