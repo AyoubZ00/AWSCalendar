@@ -4,6 +4,7 @@
       FunctionName: !Sub '${StackName}-GetCalendar-${ApiVersion}'
       Timeout: 10
       Handler: src/calendar/controller/calendarController.createCalendar
+      Runtime: python3.7
       Policies:
       - AmazonRDSFullAccess
       Environment:
