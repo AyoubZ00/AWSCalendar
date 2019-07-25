@@ -1,4 +1,4 @@
-/tenant:
+/calendar:
   get:
     produces:
       - "application/json"
