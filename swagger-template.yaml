@@ -5,6 +5,7 @@ info:
 paths:
   # V0
   $ref#globalV0: "v0/swagger/paths.yaml"
+  $ref#calendarV0: "v0/swagger/calendar-paths.yaml"
 definitions:
   $ref#global: "swagger-definitions.yaml"
  
