@@ -1,6 +1,6 @@
 import psycopg2
-from v0.src.calendar.RepositoriesCalendar.configDB import config
-from v0.src.calendar.RepositoriesCalendar.connect import connect
+from RepositoriesCalendar.configDB import config
+from RepositoriesCalendar.connect import connect
 def delete_event(event_id):
     """ delete event by event id """
     conn = None
@@ -56,4 +56,4 @@ def remove_allevents():
 
 
 if __name__ == "__main__":
-    remove_allevents()
+    delete_event(14)

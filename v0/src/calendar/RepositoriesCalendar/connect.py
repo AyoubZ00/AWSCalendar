@@ -1,5 +1,5 @@
 import psycopg2
-from v0.src.calendar.RepositoriesCalendar.configDB import config 
+from RepositoriesCalendar.configDB import config 
 
 def connect():
     """ Connect to the PostgreSQL database server """
@@ -16,3 +16,5 @@ def connect():
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
+if __name__ == "__main__":
+    connect()

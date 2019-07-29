@@ -7,8 +7,8 @@ class EventClass:
     event_id = int
     name = str 
     description = str
-    date_start = datetime 
-    date_end   = datetime
+    startdate = datetime 
+    enddate   = datetime
    
     def __init__(self, id, name = '', description = '', date_start = None, date_end = None):
         self.event_id = id 
