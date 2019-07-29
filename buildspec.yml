@@ -17,9 +17,10 @@ phases:
         DB_URL=`aws ssm get-parameter --name $STACK-db-url | jq -r '.Parameter.Value' | cut -d':' -f1`
         DB_USERNAME=`aws ssm get-parameter --name $STACK-db-username | jq -r '.Parameter.Value'`
         DB_PASSWORD=`aws ssm get-parameter --name $STACK-db-password | jq -r '.Parameter.Value'`
-        NODE_ENV=`echo $STACK | cut -d'-' -f1`
+        ENVIRONMENT=`echo $STACK | cut -d'-' -f1`
 
-        sed -i.bak -e "s/\${StackName}/${STACK}/g" *.yaml
+        sed -i.bak -e "s/\${StackName}/${STACK}/g" \
+            -e "s/\${Environment}/${ENVIRONMENT}/g" *.yaml
         for VERSION in ./*/
         do
           VERSION=${VERSION%*/}
@@ -32,7 +33,10 @@ phases:
           find ./${VERSION##*/} -name "*.yaml" -print0 | xargs -0 sed -i.bak \
               -e "s/\${ApiVersion}/${VERSION##*/}/" \
               -e "s/\${StackName}/${STACK}/" \
-              -e "s/\${NodeEnv}/${NODE_ENV}/"
+              -e "s/\${Environment}/${ENVIRONMENT}/"
+
+          find ./${VERSION##*/}/src/clients -name "*.js" -print0 | xargs -0 sed -i.bak \
+              -e "s/\${Environment}/${ENVIRONMENT}/"
 
           sed -i.bak \
               -e "s/^\//\/${VERSION##*/}\//" \
@@ -45,6 +49,7 @@ phases:
           cd ../..
         done
         swagger-merger -i ./swagger-template.yaml -o ./swagger.yaml
+        aws s3 cp ./swagger.yaml s3://msb-functions/swagger/${STACK}/swagger.yaml
 
   build:
     commands: |

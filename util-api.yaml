@@ -2,6 +2,9 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: MSB UTIL API.
 
+Conditions:
+  IsProd: !Equals ["${Environment}", "PROD"]
+
 Resources:
 
   TransportApi:
@@ -9,5 +12,13 @@ Resources:
     Properties:
       Name: !Ref AWS::StackName
       StageName: Live
-      DefinitionUri: ./swagger.yaml
+      Cors:
+        AllowHeaders: "'Content-Type'"
+        AllowOrigin: !If [IsProd, "'http://manager.marocschoolbus.com'", "'*'"]
+      DefinitionBody:
+          'Fn::Transform':
+            Name: 'AWS::Include'
+            # Replace <bucket> with your bucket name
+            Parameters:
+              Location: !Sub 's3://msb-functions/swagger/${StackName}/swagger.yaml'
 

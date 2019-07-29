@@ -1,7 +1,7 @@
 'use strict';
 
 const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || 'local';
+const env = process.env.ENVIRONMENT || 'local';
 const config = require('./databases')[env];
 const db = {};
 
