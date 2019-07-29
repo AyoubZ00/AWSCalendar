@@ -6,7 +6,7 @@ import dateutil.parser
 def GetCalendar(event, context):
         # yourdate = dateutil.parser.parse(adate)
     return {
-        'body': json.loads(getOneTodayCalendarAPI(20))
+        'body': json.loads(getOneTodayCalendarAPI(1))
     }
     
     
