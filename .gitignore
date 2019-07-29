@@ -1,5 +1,6 @@
 **/node_modules
 *.iml
 .idea
+.vscode
 package-lock.json
 v*/src/index.js

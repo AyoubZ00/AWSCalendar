@@ -1,4 +1,4 @@
-from ServiceCalendar.parsetojson import *
+from calendar.ServiceCalendar.parsetojson import *
 import json
 import dateutil.parser
 

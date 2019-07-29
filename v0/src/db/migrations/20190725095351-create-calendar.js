@@ -5,8 +5,7 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID,
-        field : 'calendar_id'
+        type: Sequelize.INTEGER
       },
       name: {
         type: Sequelize.STRING

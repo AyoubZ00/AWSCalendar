@@ -5,10 +5,11 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID
-      },calendarId: {
+        type: Sequelize.INTEGER
+      },
+      calendarId: {
         allowNull: false,
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         field: 'calendar_id'
       },
       recurrence: {
@@ -18,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.STRING       
+        type: Sequelize.STRING
       },
       duration: {
         type: Sequelize.INTEGER

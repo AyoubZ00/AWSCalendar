@@ -19,6 +19,9 @@ phases:
         DB_PASSWORD=`aws ssm get-parameter --name $STACK-db-password | jq -r '.Parameter.Value'`
         ENVIRONMENT=`echo $STACK | cut -d'-' -f1`
 
+        # used by sequelize-cli
+        NODE_ENV=$ENVIRONMENT
+
         sed -i.bak -e "s/\${StackName}/${STACK}/g" \
             -e "s/\${Environment}/${ENVIRONMENT}/g" *.yaml
         for VERSION in ./*/
