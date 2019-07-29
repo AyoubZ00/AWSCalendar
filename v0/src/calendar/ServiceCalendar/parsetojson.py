@@ -1,12 +1,21 @@
 import json
 # from ServiceCalendar.CalendarEventsService import *
-from v0.src.calendar.RepositoriesCalendar.select_calendar import * 
-from v0.src.calendar.ServiceCalendar.holidayEventsService import *
-from v0.src.calendar.ServiceCalendar.CalendarEventsService import *
-from v0.src.calendar.ServiceCalendar.toggleHolidayAware import *
+from RepositoriesCalendar.select_calendar import * 
+from ServiceCalendar.holidayEventsService import *
+from ServiceCalendar.CalendarEventsService import *
+from ServiceCalendar.toggleHolidayAware import *
 
 def getOneCalendarAPI(calendar_id):
     api = to_dict(instantiateACalendarEvents(calendar_id))
+    return api
+
+def getOneTodayCalendarAPI(calendar_id):
+    api = to_dict(instantiateACalendarEventsForToday(calendar_id))
+    return api
+
+
+def getOneADayCalendarAPI(calendar_id, basedate):
+    api = to_dict(instantiateACalendarEventsForADay(calendar_id, basedate))
     return api
 
 def getOneAwareCalendarAPI(calendar_id):
@@ -18,8 +27,8 @@ def getOneAwareCalendarAPI(calendar_id):
 
 def to_dict(obj):
     return json.dumps(obj, default=myconverter,
-     indent=4, sort_keys=True)
-
+     indent=4,)
+#sort_keys=True
 
 
 

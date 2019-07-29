@@ -1,6 +1,6 @@
 import psycopg2
-from v0.src.calendar.RepositoriesCalendar.configDB import config
-from v0.src.calendar.RepositoriesCalendar.connect import connect
+from RepositoriesCalendar.configDB import config
+from RepositoriesCalendar.connect import connect
  
 def insert_event(
                  calendar_id, 
@@ -34,4 +34,4 @@ def insert_event(
 
 
 if __name__ == '__main__':
-    print(insert_event(19, '0 8 22 * mon-fri 2019',"Trip 2", "Morning trip for bus 0004", 7200))
+    print(insert_event(20, '0 14 * * mon-fri 2019',"Trip 2", "Morning trip for bus 0002", 3600))

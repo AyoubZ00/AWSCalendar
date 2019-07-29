@@ -1,6 +1,6 @@
 import psycopg2
-from v0.src.calendar.RepositoriesCalendar.configDB import config
-from v0.src.calendar.RepositoriesCalendar.connect import connect
+from RepositoriesCalendar.configDB import config
+from RepositoriesCalendar.connect import connect
 def get_holidays(conn):
     """ query data from the holidays table """
     # conn = None
