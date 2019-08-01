@@ -3,12 +3,13 @@
     Properties:
       FunctionName: !Sub '${StackName}-GetCalendar-${ApiVersion}'
       Timeout: 10
-      Handler: main.getCalendar
+      Handler: src/calendar/controller/calendarController.getCalendar
       Runtime: python3.7
       Policies:
       - AmazonRDSFullAccess
       Environment:
         Variables:
+          PYTHONPATH: src/calendar
           NODE_ENV: '${NodeEnv}'
           DB_URL: '{{resolve:ssm:${StackName}-db-url:1}}'
           DB_USERNAME: '{{resolve:ssm:${StackName}-db-username:1}}'
