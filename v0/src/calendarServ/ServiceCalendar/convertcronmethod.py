@@ -1,6 +1,6 @@
 from croniter import croniter
 from datetime import datetime, timedelta
-
+from calendarServ.RepositoriesCalendar.select_holidays import *
 
 def convertCronDate(recurrence='0 8 * * mon-fri 2019', duration = 3600):
   year = recurrence[-4:]
@@ -24,6 +24,41 @@ def convertCronDate(recurrence='0 8 * * mon-fri 2019', duration = 3600):
 
   return my_list
 
+
+def convertCronDateNext(recurrence='0 8 * * mon-fri 2019', duration=3600, basedate=None):
+  year = recurrence[-4:]
+  recurrence = recurrence[:-4]
+  #basedate: year month day heure minute
+  if(basedate is None):
+    return None 
+
+  #recurrence cron : min hour day month day_of_week
+  iter = croniter(recurrence, basedate, day_or=False)
+
+
+  date = iter.get_next(datetime)
+  
+
+    
+
+
+  # print("Date Debut : ", date)
+  datef = date + timedelta(seconds=duration)
+      # print("Date Fin   : ", datef)
+  my_list = []
+  tmp = (date, datef)
+  my_list.append(tmp)
+
+  return my_list 
+
+def help(date,Holidaydates):
+  for adate in Holidaydates:
+    if(compareTwoDates(date,adate)):
+      return True
+   
+  return False 
+
+
 def convertCronDateADay(recurrence='0 8 * * mon-fri 2019', duration=3600, basedate=None):
   # year = recurrence[-4:]
   recurrence = recurrence[:-4]
@@ -41,9 +76,11 @@ def convertCronDateADay(recurrence='0 8 * * mon-fri 2019', duration=3600, baseda
   # print("Date Debut : ", date)
   datef = date + timedelta(seconds=duration)
   # print("Date Fin   : ", datef)
-  s = "%Y-%m-%dT%H:%M:%SZ"
-  tmp = (date.strftime(s),
-         datef.strftime(s))
+  # s = "%Y-%m-%dT%H:%M:%SZ"
+  # tmp = (date.strftime(s),
+  #        datef.strftime(s))
+  tmp = (date, datef)
+
   my_list.append(tmp)
   return my_list
 
@@ -67,9 +104,10 @@ def convertCronDateToday(recurrence='0 8 * * mon-fri 2019', duration=3600):
   datef = date + timedelta(seconds=duration)
 
   # print("Date Fin   : ", datef)
-  s = "%Y-%m-%dT%H:%M:%SZ"
-  tmp = (date.strftime(s),
-         datef.strftime(s))
+  # s = "%Y-%m-%dT%H:%M:%SZ"
+  # tmp = (date.strftime(s),
+  # #        datef.strftime(s))
+  tmp = (date,datef)
   my_list.append(tmp)
 
   return my_list
@@ -129,6 +167,29 @@ def convertCronDateAWeek(recurrence='0 8 * * mon-fri 2019', duration=3600, based
    # print("Date Fin   : ", datef)
    tmp = (date, datef)
    my_list.append(tmp)
+
+  return my_list
+
+
+def convertCronDateNextHolidayAware(recurrence='0 8 * * mon-fri 2019', duration=3600, basedate=None,dateHolidays = None):
+  year = recurrence[-4:]
+  recurrence = recurrence[:-4]
+  #basedate: year month day heure minute
+  if(basedate is None):
+    return None
+
+  #recurrence cron : min hour day month day_of_week
+  iter = croniter(recurrence, basedate, day_or=False)
+
+  date = iter.get_next(datetime)
+  while(help(date, dateHolidays)):
+    date = iter.get_next(datetime)
+  # print("Date Debut : ", date)
+  datef = date + timedelta(seconds=duration)
+  # print("Date Fin   : ", datef)
+  my_list = []
+  tmp = (date, datef)
+  my_list.append(tmp)
 
   return my_list
 

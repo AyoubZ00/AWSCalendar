@@ -37,4 +37,4 @@ if __name__ == '__main__':
     # print(insert_holiday('0 0 * * sat-sun 2019',"Weekend", "You know, Weekends"))
     # print(insert_holiday('0 0 30 7 * 2019', "Throne Day",
     #                      "Celebrate Ascension of Moroccan KingTo the Throne"))
-    print(insert_holiday('30 0 1 1 * 2019', "Some Holiday", "You know, Holiday"))
+    print(insert_holiday('0 0 30 7 * 2019', "Throne Day", "A Holiday"))

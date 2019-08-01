@@ -22,6 +22,27 @@ def getOneAwareCalendarAPI(calendar_id):
     api = to_dict(invokeAHolidayAwareCalendar(calendar_id))
     return api 
 
+def getNextCalendarAPI(calendar_id,basedate):
+    api = to_dict(instantiateNextCalendarEvents(calendar_id,basedate))
+    return api 
+
+def getPeriodCalendarAPI(calendar_id,basedate,enddate):
+    api = to_dict(instantiatePeriodCalendarEvents(calendar_id,basedate,enddate))
+    return api 
+
+
+def getOneAwareTodayCalendarAPI(calendar_id):
+    api = to_dict(invokeAHolidayAwareCalendarToday(calendar_id))
+    return api 
+
+def getOneAwareForADayCalendarAPI(calendar_id,basedate):
+    api = to_dict(invokeAHolidayAwareCalendarForADay(calendar_id,basedate))
+    return api
+
+def getOneAwareNextCalendarAPI(calendar_id,basedate):
+    api = to_dict(invokeAHolidayAwareCalendarForNext(calendar_id,basedate))
+    return api
+
 # def to_dict(calendar_id):
 #     return json.loads(json.dumps(instantiateACalendarEvents(calendar_id), default=myconverter))
 
@@ -41,6 +62,8 @@ def to_dict(obj):
 
 def myconverter(o):
     if isinstance(o, datetime):
+        s = "%Y-%m-%dT%H:%M:%SZ"
+        o = o.strftime(s)
         return o.__str__()
     else:
         return o.__dict__
