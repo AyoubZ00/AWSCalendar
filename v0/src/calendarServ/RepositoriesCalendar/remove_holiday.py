@@ -1,6 +1,6 @@
 import psycopg2
-from calendarServ.RepositoriesCalendar.configDB import config
-from calendarServ.RepositoriesCalendar.connect import connect
+from src.calendarServ.RepositoriesCalendar.configDB import config
+from src.calendarServ.RepositoriesCalendar.connect import connect
 def delete_holiday(holiday_id):
     """ delete holiday by holiday id """
     conn = None

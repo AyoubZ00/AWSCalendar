@@ -1,6 +1,6 @@
 import psycopg2
-from calendarServ.RepositoriesCalendar.configDB import config
-from calendarServ.RepositoriesCalendar.connect import connect
+from src.calendarServ.RepositoriesCalendar.configDB import config
+from src.calendarServ.RepositoriesCalendar.connect import connect
  
 def insert_calendar(name = '' , calendar_description = ''):
     """ insert a new calendar into the calendar table """

@@ -3,7 +3,7 @@
     Properties:
       FunctionName: !Sub '${StackName}-GetCalendar-${ApiVersion}'
       Timeout: 10
-      Handler: src.main.getCalendar
+      Handler: main.getCalendar
       Runtime: python3.7
       Policies:
       - AmazonRDSFullAccess

@@ -1,7 +1,7 @@
 import psycopg2
 import datetime 
-from calendarServ.RepositoriesCalendar.configDB import config
-from calendarServ.RepositoriesCalendar.connect import connect
+from src.calendarServ.RepositoriesCalendar.configDB import config
+from src.calendarServ.RepositoriesCalendar.connect import connect
 
 
 def get_calendar(conn):

@@ -1,6 +1,6 @@
 import psycopg2
 from psycopg2 import pool
-from calendarServ.RepositoriesCalendar.configDB import * 
+from src.calendarServ.RepositoriesCalendar.configDB import *
 try:
     params = config()
     user = params['user']

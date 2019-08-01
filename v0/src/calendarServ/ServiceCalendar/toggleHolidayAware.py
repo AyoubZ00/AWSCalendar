@@ -1,8 +1,8 @@
-from calendarServ.RepositoriesCalendar.select_holidays import *
-from calendarServ.ServiceCalendar.convertcronmethod import convertCronDateNoDuration
-from calendarServ.ServiceCalendar.CalendarEventsService import *
-from calendarServ.ServiceCalendar.convertcronmethod import *
-from calendarServ.ServiceCalendar.holidayclass import *
+from src.calendarServ.RepositoriesCalendar.select_holidays import *
+from src.calendarServ.ServiceCalendar.convertcronmethod import convertCronDateNoDuration
+from src.calendarServ.ServiceCalendar.CalendarEventsService import *
+from src.calendarServ.ServiceCalendar.convertcronmethod import *
+from src.calendarServ.ServiceCalendar.holidayclass import *
 
 def toggleHolidayAware(holidayList, calendarList):
     newcalendarlist = []

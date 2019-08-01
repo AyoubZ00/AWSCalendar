@@ -1,5 +1,5 @@
 import psycopg2
-from calendarServ.RepositoriesCalendar.configDB import config
+from src.calendarServ.RepositoriesCalendar.configDB import config
 
 def connect():
     """ Connect to the PostgreSQL database server """

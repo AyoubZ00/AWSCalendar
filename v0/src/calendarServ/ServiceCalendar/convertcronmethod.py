@@ -1,6 +1,6 @@
 from croniter import croniter
 from datetime import datetime, timedelta
-from calendarServ.RepositoriesCalendar.select_holidays import *
+from src.calendarServ.RepositoriesCalendar.select_holidays import *
 
 def convertCronDate(recurrence='0 8 * * mon-fri 2019', duration = 3600):
   year = recurrence[-4:]

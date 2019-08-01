@@ -1,14 +1,13 @@
-from calendarServ.ServiceCalendar.parsetojson import *
+from src.calendarServ.ServiceCalendar.parsetojson import *
 import json
 import dateutil.parser
-from calendarServ.RepositoriesCalendar.insert_holiday import * 
-import time 
+from src.calendarServ.RepositoriesCalendar.insert_holiday import * 
 from psycopg2 import pool
 
 def GetCalendar(event, context):
         # yourdate = dateutil.parser.parse(adate)
     return {
-        'body': json.loads(getOneTodayCalendarAPI(20))
+        'body': json.loads(getOneTodayCalendarAPI(1))
     }
     
 
@@ -53,8 +52,8 @@ def GetHolidayAwareNextCalendar(event,context):
 if __name__ == '__main__':
     # adate = '2019-07-30T08:00:00Z'
     # yourdate = dateutil.parser.parse(adate)
-    event = {}
-    event['startdate'] = '2019-08-11T08:00:00Z'
+    # event = {}
+    # event['startdate'] = '2019-08-11T08:00:00Z'
     # event['enddate'] = '2019-08-2T15:00:00Z'
     # # # print(createCalendar(event,'hey'))
     # # print(GetSomeDayCalendar(event,'hey'))

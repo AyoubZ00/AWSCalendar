@@ -1,9 +1,9 @@
 import json
 # from ServiceCalendar.CalendarEventsService import *
-from calendarServ.RepositoriesCalendar.select_calendar import * 
-from calendarServ.ServiceCalendar.holidayEventsService import *
-from calendarServ.ServiceCalendar.CalendarEventsService import *
-from calendarServ.ServiceCalendar.toggleHolidayAware import *
+from src.calendarServ.RepositoriesCalendar.select_calendar import * 
+from src.calendarServ.ServiceCalendar.holidayEventsService import *
+from src.calendarServ.ServiceCalendar.CalendarEventsService import *
+from src.calendarServ.ServiceCalendar.toggleHolidayAware import *
 
 def getOneCalendarAPI(calendar_id):
     api = to_dict(instantiateACalendarEvents(calendar_id))

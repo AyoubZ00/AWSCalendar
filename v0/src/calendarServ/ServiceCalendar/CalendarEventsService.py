@@ -1,12 +1,12 @@
 import psycopg2
 
-from calendarServ.RepositoriesCalendar.select_event import *
-from calendarServ.ServiceCalendar.eventclass import *
-from calendarServ.ServiceCalendar.convertcronmethod import *
-from calendarServ.ServiceCalendar.calendarclass import *
-from calendarServ.RepositoriesCalendar.select_calendar import *
-from calendarServ.ServiceCalendar.CalendarEventsService import *
-from calendarServ.ServiceCalendar.holidayEventsService import *
+from src.calendarServ.RepositoriesCalendar.select_event import *
+from src.calendarServ.ServiceCalendar.eventclass import *
+from src.calendarServ.ServiceCalendar.convertcronmethod import *
+from src.calendarServ.ServiceCalendar.calendarclass import *
+from src.calendarServ.RepositoriesCalendar.select_calendar import *
+from src.calendarServ.ServiceCalendar.CalendarEventsService import *
+from src.calendarServ.ServiceCalendar.holidayEventsService import *
 
 
 def instantiateACalendarEvents(calendarid):

@@ -1,6 +1,6 @@
 import psycopg2
-from calendarServ.RepositoriesCalendar.configDB import config
-from calendarServ.RepositoriesCalendar.connect import connect
+from src.calendarServ.RepositoriesCalendar.configDB import config
+from src.calendarServ.RepositoriesCalendar.connect import connect
  
 def insert_event(
                  calendar_id, 

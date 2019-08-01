@@ -2,7 +2,7 @@ from configparser import ConfigParser
 import os
  
 
-def config(filename='calendarServ/RepositoriesCalendar/database.ini'):
+def config(filename='src/calendarServ/RepositoriesCalendar/database.ini'):
     # create a parser
     parser = ConfigParser()
     # read config file
