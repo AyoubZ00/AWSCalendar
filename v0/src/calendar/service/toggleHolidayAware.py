@@ -4,35 +4,37 @@ from service.CalendarEventsService import *
 from service.convertcronmethod import *
 from service.holidayclass import *
 
+
 def toggleHolidayAware(holidayList, calendarList):
     newcalendarlist = []
     newcalendarlist = calendarList
-    for acalendar in calendarList: 
-      newcalendar = CalendarClass(acalendar.id,acalendar.name,acalendar.description)
+    for acalendar in calendarList:
+      newcalendar = CalendarClass(
+          acalendar.id, acalendar.name, acalendar.description)
       neweventsList = []
       for aevent in acalendar.events:
-        if(handleEvent(aevent,holidayList)):
+        if(handleEvent(aevent, holidayList)):
             x = newcalendarlist.events.index(aevent.date_start)
             del newcalendarlist.events[x]
     return newcalendarlist
 
-def handleEvent(date,holidaylist):
+
+def handleEvent(date, holidaylist):
         for aholiday in holidaylist:
             if(compareTwoDates(date, aholiday)):
                 return True
-        return False 
-                
-    
+        return False
+
 
 def invokeAHolidayAwareCalendar(calendarid):
     conn = connect()
     calendarRow = get_acalendar(calendarid, conn)
     rows = get_event(calendarRow[0], conn)
-    lines = get_holidays(conn) 
+    lines = get_holidays(conn)
     InstantiatedEventsList = []
     conn.close()
     for row in rows:
-        anInstantiatedEvent = instantiateOneAwareEvent(row,lines)
+        anInstantiatedEvent = instantiateOneAwareEvent(row, lines)
         InstantiatedEventsList.extend(anInstantiatedEvent)
     acalendar = CalendarClass(
         calendarRow[0], calendarRow[1], calendarRow[2],
@@ -58,7 +60,7 @@ def invokeAHolidayAwareCalendarToday(calendarid):
     return acalendar
 
 
-def invokeAHolidayAwareCalendarForADay(calendarid,basedate):
+def invokeAHolidayAwareCalendarForADay(calendarid, basedate):
     conn = connect()
     calendarRow = get_acalendar(calendarid, conn)
     rows = get_event(calendarRow[0], conn)
@@ -93,15 +95,16 @@ def invokeAHolidayAwareCalendarForNext(calendarid, basedate):
     acalendar.events = InstantiatedEventsList
     return acalendar
 
-def instantiateOneAwareEvent(row,lines):
+
+def instantiateOneAwareEvent(row, lines):
     instancesList = []
     dateTuples = convertCronDate(row[1], row[5])
     allHolidayDates = []
-    for line in lines : 
+    for line in lines:
         dateHolidays = convertCronDateNoDuration(line[1])
         allHolidayDates.append(dateHolidays)
     for adate in dateTuples:
-        if(not handleEvent(adate[0],allHolidayDates)):
+        if(not handleEvent(adate[0], allHolidayDates)):
            aevent = EventClass(row[0])
            aevent.name = row[2]
            aevent.description = row[3]
@@ -131,11 +134,11 @@ def instantiateOneAwareEventToday(row, lines):
     return instancesList
 
 
-def instantiateOneAwareEventForADay(row, lines,basedate):
+def instantiateOneAwareEventForADay(row, lines, basedate):
     instancesList = []
     dateTuples = []
-    if(convertCronDateADay(row[1], row[5],basedate) is not None):
-        dateTuples = convertCronDateADay(row[1], row[5],basedate)
+    if(convertCronDateADay(row[1], row[5], basedate) is not None):
+        dateTuples = convertCronDateADay(row[1], row[5], basedate)
     allHolidayDates = []
     for line in lines:
         dateHolidays = convertCronDateNoDuration(line[1])
@@ -160,15 +163,15 @@ def instantiateOneAwareEventForNext(row, lines, basedate):
     for line in lines:
         dateHolidays = convertCronDateNoDuration(line[1])
         allHolidayDates.append(dateHolidays)
-    dateTuples = convertCronDateNextHolidayAware(row[1], row[5], basedate,allHolidayDates)
+    dateTuples = convertCronDateNextHolidayAware(
+        row[1], row[5], basedate, allHolidayDates)
     for adate in dateTuples:
-        
+
            aevent = EventClass(row[0])
            aevent.name = row[2]
            aevent.description = row[3]
            aevent.startdate = adate[0]
            aevent.enddate = adate[1]
            instancesList.append(aevent)
-
 
     return instancesList

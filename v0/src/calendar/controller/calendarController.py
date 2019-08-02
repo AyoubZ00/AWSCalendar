@@ -80,4 +80,5 @@ if __name__ == '__main__':
     # conn = connect()
     # print(get_allevent(conn))
     # conn.close()
-    print(GetCalendar(1,'hey'))
+    # print(GetCalendar(1,'hey'))
+    print(GetHolidayAwareTodayCalendar(1, 'hey'))

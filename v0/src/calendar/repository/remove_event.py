@@ -18,7 +18,7 @@ def delete_event(event_id):
         conn.commit()
         # Close communication with the PostgreSQL database
         cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception, package.psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
@@ -35,7 +35,7 @@ def remove_allevents():
         # read database configuration
         params = config()
         # connect to the PostgreSQL database
-        conn = psycopg2.connect(**params)
+        conn = package.psycopg2.connect(**params)
         # create a new cursor
         cur = conn.cursor()
         # execute the UPDATE  statement
@@ -46,7 +46,7 @@ def remove_allevents():
         conn.commit()
         # Close communication with the PostgreSQL database
         cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception, package.psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:

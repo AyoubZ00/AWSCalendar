@@ -13,8 +13,7 @@ def get_holidays(conn):
         print("The number of parts: ", cur.rowcount)
         rows = cur.fetchall()
  
-       
-    except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception, package.psycopg2.DatabaseError) as error:
         print(error)
     # finally:
     #     if conn is not None:

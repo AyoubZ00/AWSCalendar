@@ -19,7 +19,7 @@ def delete_calendar(calendar_id):
         print(rows_deleted)
         # Close communication with the PostgreSQL database
         cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception, package.psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
@@ -46,7 +46,7 @@ def remove_allcalendars():
         # Close communication with the PostgreSQL database
         cur.close()
         print(rows_deleted)
-    except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception, package.psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
