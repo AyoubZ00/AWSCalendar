@@ -14,8 +14,7 @@ def get_calendar(conn):
         rows = cur.fetchall()
   
 
-
-    except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception, package.psycopg2.DatabaseError) as error:
         print(error)
     # finally:
     #     if conn is not None:
@@ -33,7 +32,7 @@ def get_acalendar(calendar_id: int, conn):
                     , (calendar_id,))
         # print("The number of parts: ", cur.rowcount)
         row = cur.fetchone()
-    except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception, package.psycopg2.DatabaseError) as error:
         print(error)
     # finally:
     #     if conn is not None:

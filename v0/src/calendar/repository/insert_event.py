@@ -24,7 +24,7 @@ def insert_event(
         conn.commit()
         # close communication with the database
         cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
+    except (Exception, package.psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
