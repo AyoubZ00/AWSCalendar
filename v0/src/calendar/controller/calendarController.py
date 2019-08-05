@@ -48,12 +48,21 @@ def GetHolidayAwareNextCalendar(event,context):
         'body': json.loads(getOneAwareNextCalendarAPI(20, adate))
     }
 
+
+def GetPeriodCalendar(event, context):
+    yourdate = dateutil.parser.parse(event['startdate'])
+    anotherdate = dateutil.parser.parse(event['enddate'])
+
+    return {
+        'body': json.loads(getOneAwarePeriodCalendarAPI(20, yourdate, anotherdate))
+    }
+
 if __name__ == '__main__':
     # adate = '2019-07-30T08:00:00Z'
     # yourdate = dateutil.parser.parse(adate)
-    # event = {}
-    # event['startdate'] = '2019-08-11T08:00:00Z'
-    # event['enddate'] = '2019-08-2T15:00:00Z'
+    event = {}
+    event['startdate'] = '2019-08-11T08:00:00Z'
+    event['enddate'] = '2019-08-2T15:00:00Z'
     # # # print(createCalendar(event,'hey'))
     # # print(GetSomeDayCalendar(event,'hey'))
     # # print(getOneTodayCalendarAPI(20))
@@ -81,4 +90,4 @@ if __name__ == '__main__':
     # print(get_allevent(conn))
     # conn.close()
     # print(GetCalendar(1,'hey'))
-    print(GetHolidayAwareTodayCalendar(1, 'hey'))
+    print(GetPeriodCalendar(event, 'hey'))

@@ -96,6 +96,24 @@ def invokeAHolidayAwareCalendarForNext(calendarid, basedate):
     return acalendar
 
 
+def invokeAHolidayAwareCalendarForAPeriod(calendarid, basedate,enddate):
+    conn = connect()
+    calendarRow = get_acalendar(calendarid, conn)
+    rows = get_event(calendarRow[0], conn)
+    lines = get_holidays(conn)
+    InstantiatedEventsList = []
+    conn.close()
+    for row in rows:
+        anInstantiatedEvent = instantiateOneAwareEventForAPeriod(
+            row, lines, basedate,enddate)
+        InstantiatedEventsList.extend(anInstantiatedEvent)
+    acalendar = CalendarClass(
+        calendarRow[0], calendarRow[1], calendarRow[2],
+        None, True)
+    acalendar.events = InstantiatedEventsList
+    return acalendar
+
+
 def instantiateOneAwareEvent(row, lines):
     instancesList = []
     dateTuples = convertCronDate(row[1], row[5])
@@ -174,4 +192,24 @@ def instantiateOneAwareEventForNext(row, lines, basedate):
            aevent.enddate = adate[1]
            instancesList.append(aevent)
 
+    return instancesList
+
+
+def instantiateOneAwareEventForAPeriod(row, lines, basedate,enddate):
+    instancesList = []
+    dateTuples = []
+    if(convertCronDateByPeriod(row[1], row[5], basedate,enddate) is not None):
+        dateTuples = convertCronDateByPeriod(row[1], row[5], basedate,enddate)
+    allHolidayDates = []
+    for line in lines:
+        dateHolidays = convertCronDateNoDuration(line[1])
+        allHolidayDates.append(dateHolidays)
+    for adate in dateTuples:
+        if(not handleEvent(adate[0], allHolidayDates)):
+           aevent = EventClass(row[0])
+           aevent.name = row[2]
+           aevent.description = row[3]
+           aevent.startdate = adate[0]
+           aevent.enddate = adate[1]
+           instancesList.append(aevent)
     return instancesList
