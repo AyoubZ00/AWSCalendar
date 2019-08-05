@@ -4,3 +4,4 @@
 .vscode
 package-lock.json
 v*/src/index.js
+__pycache__
