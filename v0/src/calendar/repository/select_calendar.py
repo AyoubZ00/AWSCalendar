@@ -1,4 +1,4 @@
-import package.psycopg2
+import psycopg2
 import datetime 
 from repository.configDB import config
 from repository.connect import connect
@@ -14,7 +14,7 @@ def get_calendar(conn):
         rows = cur.fetchall()
   
 
-    except (Exception, package.psycopg2.DatabaseError) as error:
+    except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     # finally:
     #     if conn is not None:
@@ -32,7 +32,7 @@ def get_acalendar(calendar_id: int, conn):
                     , (calendar_id,))
         # print("The number of parts: ", cur.rowcount)
         row = cur.fetchone()
-    except (Exception, package.psycopg2.DatabaseError) as error:
+    except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     # finally:
     #     if conn is not None:

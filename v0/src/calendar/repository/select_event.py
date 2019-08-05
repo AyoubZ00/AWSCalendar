@@ -1,4 +1,4 @@
-import package.psycopg2
+import psycopg2
 from repository.configDB import config
 from repository.connect import connect
 
@@ -14,7 +14,7 @@ def get_event(calendar_id,conn):
         cur.execute(queryline,(calendar_id,))
         rows = cur.fetchall()
         cur.close()
-    except (Exception, package.psycopg2.DatabaseError) as error:
+    except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     # finally:
     #     if conn is not None:
@@ -31,7 +31,7 @@ def get_allevent(conn):
         cur.execute(queryline)
         rows = cur.fetchall()
 
-    except (Exception, package.psycopg2.DatabaseError) as error:
+    except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     # finally:
     #     if conn is not None:

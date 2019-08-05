@@ -1,4 +1,4 @@
-import package.psycopg2
+import psycopg2
 
 from repository.select_event import *
 from service.eventclass import *

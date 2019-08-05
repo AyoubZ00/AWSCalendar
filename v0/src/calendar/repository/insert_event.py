@@ -1,4 +1,4 @@
-import package.psycopg2
+import psycopg2
 from repository.configDB import config
 from repository.connect import connect
  
@@ -24,7 +24,7 @@ def insert_event(
         conn.commit()
         # close communication with the database
         cur.close()
-    except (Exception, package.psycopg2.DatabaseError) as error:
+    except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:

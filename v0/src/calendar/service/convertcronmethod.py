@@ -1,4 +1,4 @@
-from package.croniter import croniter
+from croniter import croniter
 from datetime import datetime, timedelta
 from repository.select_holidays import *
 
