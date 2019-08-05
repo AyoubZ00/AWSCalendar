@@ -1,5 +1,4 @@
 import package.psycopg2
-# import psycopg2
 from repository.configDB import config
 
 def connect():

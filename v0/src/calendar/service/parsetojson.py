@@ -51,6 +51,11 @@ def getOneAwareNextCalendarAPI(calendar_id, basedate):
     api = to_dict(invokeAHolidayAwareCalendarForNext(calendar_id, basedate))
     return api
 
+
+def getOneAwarePeriodCalendarAPI(calendar_id, basedate,enddate):
+    api = to_dict(invokeAHolidayAwareCalendarForAPeriod(calendar_id, basedate,enddate))
+    return api
+
 # def to_dict(calendar_id):
 #     return json.loads(json.dumps(instantiateACalendarEvents(calendar_id), default=myconverter))
 
